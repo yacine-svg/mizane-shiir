@@ -1,0 +1,403 @@
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Scheherazade+New:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
+
+@tailwind utilities;
+
+:root {
+  /* Core palette — aged parchment & deep ink */
+  --ink:            #1a1008;
+  --ink-light:      #2e1f0e;
+  --parchment:      #f5edd8;
+  --parchment-dark: #e8d9b8;
+  --gold:           #c8922a;
+  --gold-light:     #e5b84a;
+  --gold-muted:     #9a6e22;
+  --crimson:        #8b1a2a;
+  --sage:           #4a6741;
+  --mist:           #c2b59b;
+  --mist-light:     #d9cdb8;
+
+  /* Glassmorphism tones */
+  --glass-bg:     rgba(245, 237, 216, 0.08);
+  --glass-border: rgba(200, 146, 42, 0.25);
+
+  /* Semantic spacing */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --radius-xl:  22px;
+}
+
+/* ─── Reset ─────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Noto Naskh Arabic', 'Amiri', serif;
+  background-color: var(--ink);
+  color: var(--parchment);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Focus visible ──────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ─── Arabic font utilities ──────────────── */
+.font-amiri   { font-family: 'Amiri', serif; }
+.font-scheher { font-family: 'Scheherazade New', serif; }
+.font-naskh   { font-family: 'Noto Naskh Arabic', serif; }
+
+/* ─── Color text utilities ───────────────── */
+.text-parchment   { color: var(--parchment); }
+.text-gold        { color: var(--gold); }
+.text-gold-light  { color: var(--gold-light); }
+.text-mist        { color: var(--mist); }
+.text-mist-light  { color: var(--mist-light); }
+.text-crimson     { color: var(--crimson); }
+
+/* ─── Page background ────────────────────── */
+.auth-bg {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 20%, rgba(200,146,42,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(139,26,42,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 0%,  rgba(200,146,42,0.06) 0%, transparent 50%),
+    #1a1008;
+}
+
+/* Optional geometric overlay */
+.geometric-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cg fill='none' stroke='%23c8922a' stroke-width='0.4' stroke-opacity='0.10'%3E%3Cpath d='M30 0 L60 30 L30 60 L0 30 Z'/%3E%3Cpath d='M30 10 L50 30 L30 50 L10 30 Z'/%3E%3Ccircle cx='30' cy='30' r='8'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* Parchment noise texture */
+.parchment-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+
+/* ─── Glass card (base) ──────────────────── */
+.glass-card {
+  background: rgba(26, 16, 8, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow:
+    0 0 0 1px rgba(200,146,42,0.07),
+    0 32px 80px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(200,146,42,0.12);
+}
+
+/* ─── Gold divider ───────────────────────── */
+.gold-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--mist);
+  font-size: 0.75rem;
+}
+.gold-divider::before,
+.gold-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-muted), transparent);
+  opacity: 0.4;
+}
+
+/* ─── Arabic input field ─────────────────── */
+.arabic-input {
+  width: 100%;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(200,146,42,0.2);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1.1rem;
+  color: var(--parchment);
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 1rem;
+  direction: rtl;
+  transition: border-color 0.22s, box-shadow 0.22s, background 0.22s;
+  outline: none;
+}
+.arabic-input::placeholder {
+  color: var(--mist);
+  opacity: 0.55;
+}
+.arabic-input:focus {
+  border-color: var(--gold);
+  background: rgba(200,146,42,0.055);
+  box-shadow: 0 0 0 3px rgba(200,146,42,0.12), inset 0 1px 3px rgba(0,0,0,0.3);
+}
+.arabic-input:hover:not(:focus) {
+  border-color: rgba(200,146,42,0.32);
+}
+.arabic-input.error {
+  border-color: var(--crimson);
+  box-shadow: 0 0 0 3px rgba(139,26,42,0.15);
+}
+
+/* ─── Gold button ────────────────────────── */
+.btn-gold {
+  padding: 0.85rem 1.75rem;
+  background: linear-gradient(135deg, #d9a030 0%, #a37320 50%, #d9a030 100%);
+  background-size: 200% auto;
+  color: var(--ink);
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-position 0.4s, transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+  box-shadow: 0 4px 20px rgba(200,146,42,0.3), inset 0 1px 0 rgba(255,255,255,0.18);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.02em;
+}
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 55%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.btn-gold:hover:not(:disabled) {
+  background-position: right center;
+  box-shadow: 0 6px 28px rgba(200,146,42,0.45), inset 0 1px 0 rgba(255,255,255,0.22);
+  transform: translateY(-1px);
+}
+.btn-gold:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 12px rgba(200,146,42,0.25);
+}
+.btn-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ─── Ghost button ───────────────────────── */
+.btn-ghost {
+  padding: 0.82rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(200,146,42,0.28);
+  color: var(--gold-light);
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 0.95rem;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s, color 0.2s;
+  letter-spacing: 0.02em;
+}
+.btn-ghost:hover {
+  background: rgba(200,146,42,0.08);
+  border-color: rgba(200,146,42,0.5);
+  color: var(--gold);
+  transform: translateY(-1px);
+}
+.btn-ghost:active {
+  transform: translateY(0);
+}
+
+/* ─── Analyze page card ──────────────────── */
+.analyze-card {
+  background: linear-gradient(145deg, rgba(30, 19, 10, 0.82), rgba(38, 29, 17, 0.95));
+  border: 1px solid rgba(200, 146, 42, 0.22);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    0 1px 0 rgba(200,146,42,0.1) inset,
+    0 20px 60px rgba(0,0,0,0.4);
+  padding: 1.5rem;
+}
+
+/* ─── Textarea (inside wrapper) ──────────── */
+.analyze-input {
+  display: block;
+  padding: 1rem 1.1rem;
+  background: rgba(15, 10, 5, 0.5);
+  border: none;
+  border-radius: 0;
+  color: var(--parchment);
+  font-family: 'Noto Naskh Arabic', serif;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  resize: vertical;
+  outline: none;
+  width: 100%;
+  min-height: 240px;
+  direction: rtl;
+  caret-color: var(--gold);
+}
+.analyze-input::placeholder {
+  color: var(--mist);
+  opacity: 0.45;
+  font-style: italic;
+}
+
+/* ─── Decorative ornament ────────────────── */
+.bayt-ornament {
+  font-family: 'Amiri', serif;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ─── Arabesque border decoration ────────── */
+.arabesque-border {
+  position: relative;
+}
+.arabesque-border::before,
+.arabesque-border::after {
+  content: '❧';
+  font-size: 1.1rem;
+  color: var(--gold);
+  opacity: 0.55;
+}
+
+/* ─── Poem strip sidebar ─────────────────── */
+.poem-strip {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+}
+
+/* ─── Password strength bar ──────────────── */
+.strength-bar {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255,255,255,0.07);
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+.strength-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease, background 0.4s ease;
+}
+
+/* ─── Checkbox ───────────────────────────── */
+.arabic-checkbox {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid rgba(200,146,42,0.35);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+}
+.arabic-checkbox:checked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+.arabic-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 700;
+}
+.arabic-checkbox:hover { border-color: var(--gold); }
+
+/* ─── Error message utility ──────────────── */
+.error-msg {
+  color: #e57373;
+  font-size: 0.82rem;
+  margin-top: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* ─── Link style ─────────────────────────── */
+.link-gold {
+  color: var(--gold-light);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+.link-gold:hover {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* ─── Animations ─────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px)  rotate(0deg); }
+  33%       { transform: translateY(-7px) rotate(1deg); }
+  66%       { transform: translateY(-3px) rotate(-1deg); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(200,146,42,0.12); }
+  50%       { box-shadow: 0 0 40px rgba(200,146,42,0.28); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-up   { animation: fadeInUp 0.55s ease both; }
+.animate-fade-up-1 { animation: fadeInUp 0.55s 0.08s ease both; }
+.animate-fade-up-2 { animation: fadeInUp 0.55s 0.16s ease both; }
+.animate-fade-up-3 { animation: fadeInUp 0.55s 0.24s ease both; }
+.animate-fade-up-4 { animation: fadeInUp 0.55s 0.32s ease both; }
+.animate-fade-up-5 { animation: fadeInUp 0.55s 0.40s ease both; }
+.animate-float     { animation: float 6s ease-in-out infinite; }
+.animate-glow      { animation: glow-pulse 3s ease-in-out infinite; }
+.animate-spin      { animation: spin 1s linear infinite; }
+
+/* ─── Scrollbar ──────────────────────────── */
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: rgba(26,16,8,0.5); }
+::-webkit-scrollbar-thumb { background: var(--gold-muted); border-radius: 3px; opacity: 0.7; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* ─── Selection ──────────────────────────── */
+::selection {
+  background: rgba(200,146,42,0.3);
+  color: var(--parchment);
+}
+
+/* ─── Reduced motion ─────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

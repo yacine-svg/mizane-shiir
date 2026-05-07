@@ -1,0 +1,70 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+
+language: "en-US"
+
+reviews:
+  profile: "balanced"                    # Professional, thorough but constructive
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: false                            # Disabled for professional tone
+  review_status: true
+  review_details: true                   # More detailed feedback for professional projects
+
+  path_instructions:
+    # Frontend - Next.js specific best practices
+    - path: "frontend/**"
+      instructions: |
+        Review for Next.js 15+ App Router best practices.
+        Focus on:
+        - Server vs Client Components usage
+        - Proper data fetching (Server Actions, Route Handlers, or React Cache)
+        - Performance optimizations (loading states, streaming, suspense)
+        - Accessibility and SEO
+        - TypeScript quality and component reusability
+        - Tailwind CSS / styling consistency
+
+    - path: "frontend/src/app/(auth)/**"
+      instructions: |
+        Pay special attention to authentication flows, session management, 
+        protected routes, redirect logic, and security best practices.
+
+    - path: "frontend/src/app/analyze/**"
+      instructions: |
+        Review server/client component boundaries, session protection, 
+        Arabic language/UI consistency, RTL support, and performance.
+
+    # Backend - FastAPI specific best practices
+    - path: "backend/**"
+      instructions: |
+        Review for FastAPI best practices including:
+        - Proper dependency injection and endpoint structure
+        - Input validation using Pydantic v2
+        - Security (CORS, rate limiting, authentication)
+        - Error handling and logging
+        - Database interactions (SQLAlchemy / async support)
+        - API documentation (OpenAPI/Swagger quality)
+        - Type hints and code organization
+
+    # General TypeScript files (mainly frontend)
+    - path: "**/*.ts"
+      instructions: |
+        Ensure strong TypeScript practices:
+        - Strict typing
+        - Proper interfaces and types (especially for authClient and API responses)
+        - Avoid `any` type where possible
+
+    # Python files (backend)
+    - path: "**/*.py"
+      instructions: |
+        Follow clean Python and FastAPI conventions:
+        - PEP 8 compliance
+        - Clear function and variable naming
+        - Proper async/await usage where beneficial
+        - Comprehensive docstrings for public endpoints and services
+
+auto_review:
+  enabled: true
+  drafts: false
+
+chat:
+  auto_reply: true
