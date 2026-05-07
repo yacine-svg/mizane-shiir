@@ -1,0 +1,63 @@
+# ========================================
+# Root .gitignore — Next.js + FastAPI + ML
+# ========================================
+
+# === Python / FastAPI ===
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/*.py[cod]
+.pytest_cache/
+**/.pytest_cache/
+.coverage
+htmlcov/
+venv/
+.venv/
+env/
+ENV/
+backend/venv/
+backend/.venv/
+
+# === Frontend (Next.js) ===
+**/node_modules/
+**/.next/
+frontend/out/
+.npm/
+
+# === ML Models (large files) ===
+models/
+*.h5
+*.pkl
+*.pt
+*.pth
+*.onnx
+*.bin
+*.safetensors
+*.keras
+
+# === Environment variables ===
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+
+# === Database ===
+*.db
+*.sqlite
+*.sqlite3
+
+# === OS / Editor ===
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === Logs ===
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
